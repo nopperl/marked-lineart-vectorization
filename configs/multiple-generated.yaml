@@ -1,0 +1,56 @@
+model_params:
+  name: "VectorVAEnLayers"
+  in_channels: 3
+  latent_dim: 128
+  path_latent_dim: 32
+  loss_fn: 'BCE'
+  paths: 4
+  shapes: 15
+  beta: 0
+  radius: 0.5
+  scale_factor: 1
+  learn_sampling: True
+  only_auxillary_training: False
+  memory_leak_training: False
+  other_losses_weight: 0
+  composite_fn: 'soft'
+  seg_loss: "dice"
+  seg_loss_weight: 1
+  control_point_loss: True
+  raster_loss_weight: 0
+  vector_loss_weight: 1
+  points: 4
+
+exp_params:
+  dataset: generated
+  data_path: "./data/bezier-multiple9/"
+  img_size: 256
+  batch_size: 4 # Better to have a square number
+  val_batch_size: 4 # Better to have a square number
+  val_shuffle: False
+  LR: 0.0001
+  weight_decay: 0.0
+  scheduler_gamma: 0.95
+  grow: True
+  train_shuffle: False
+  min_paths: 2
+  max_paths: 15
+  use_scheduler: False
+  show_control_points: False
+  shapes: 15
+  points: 4
+  num_images: 500
+  num_val_images: 50
+  force_grayscale: False
+  radius: 0.5
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 25000
+
+logging_params:
+  save_dir: "logs/"
+  other_interpolations: True
+  name: "VectorVAEnLayers"
+  version: 591
+  manual_seed: 1234

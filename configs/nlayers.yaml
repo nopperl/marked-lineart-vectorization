@@ -1,0 +1,50 @@
+model_params:
+  name: "VectorVAEnLayers"
+  in_channels: 3
+  latent_dim: 64
+  point_loss_fn: "huber"
+  loss_fn: "BCE"
+  radius: 1.0
+  num_points: 2
+  img_size: 64
+  reparameterize: False
+  control_point_loss: True
+  seg_loss_weight: 1
+  raster_loss_weight: 1
+  vector_loss_weight: 10
+  seg_loss: "dice"
+  shapes: 5
+  composite_fn: "soft"
+
+exp_params:
+  dataset: generated
+  data_path: "./data/fixed2/"
+  img_size: 64
+  batch_size: 144 # Better to have a square number
+  val_batch_size: 16 # Better to have a square number
+  val_shuffle: False
+  LR: 0.00005
+  weight_decay: 0.0
+  scheduler_gamma: 0.95
+  grow: True
+  train_shuffle: False
+  min_paths: 3
+  max_paths: 5
+  use_scheduler: False
+  show_control_points: False
+  shapes: 3
+  points: 2
+  num_images: 200
+  num_val_images: 4
+  force_grayscale: False
+  radius: 1.0
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 25000
+
+logging_params:
+  save_dir: "logs/"
+  name: "VectorVAEnLayers"
+  version: 101
+  manual_seed: 1234

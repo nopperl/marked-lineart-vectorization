@@ -1,0 +1,19 @@
+version: "3.9"
+name: marked-lineart-vec
+services:
+  onnx:
+    build:
+      context: .
+      dockerfile: onnx.Dockerfile
+    volumes:
+      - ./data:/workspace/data
+      - ./outputs:/workspace/outputs
+    tmpfs:
+      - /tmp
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

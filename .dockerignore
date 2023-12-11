@@ -1,0 +1,10 @@
+.git
+.idea
+.ipynb_checkpoints/
+__pycache__/
+logs
+venv
+data
+*.png
+*.svg
+*.ckpt

@@ -1,0 +1,8 @@
+cssutils==2.3.0
+numba==0.53.1
+numpy==1.19.2
+scikit-image==0.18.1
+svgwrite==1.4.1
+svgpathtools==1.4.1
+torch-tools==0.1.5
+visdom==0.1.8.9

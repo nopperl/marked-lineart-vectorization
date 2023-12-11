@@ -1,0 +1,7 @@
+onnx==1.14.0
+onnxruntime-gpu==1.15.1
+tensorrt==8.6.1
+imageio==2.31.1
+svgpathtools==1.6.1
+cairosvg==2.7.0
+scikit-image==0.21.0

@@ -1,0 +1,43 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 233e4be..043fc1d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5,6 +5,8 @@ project(diffvg VERSION 0.0.1 DESCRIPTION "Differentiable Vector Graphics")
+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ 
++set(CMAKE_CXX_FLAGS "-std=c++11")
++
+ if(WIN32)
+     find_package(Python 3.6 COMPONENTS Development REQUIRED)
+ else()
+diff --git a/setup.py b/setup.py
+index fdb9f67..be0ef82 100644
+--- a/setup.py
++++ b/setup.py
+@@ -5,7 +5,7 @@ import sys
+ import platform
+ import subprocess
+ import importlib
+-from sysconfig import get_paths
++import sysconfig
+ 
+ import importlib
+ from setuptools import setup, Extension
+@@ -33,10 +33,14 @@ class Build(build_ext):
+     def build_extension(self, ext):
+         if isinstance(ext, CMakeExtension):
+             extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
+-            info = get_paths()
++            info = sysconfig.get_paths()
+             include_path = info['include']
++            library = sysconfig.get_config_var('LIBDIR') + '/libpython3.8.so'
+             cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
+-                          '-DPYTHON_INCLUDE_PATH=' + include_path]
++                          '-DPYTHON_INCLUDE_PATH=' + include_path,
++#                          '-DPYTHON_INCLUDE_DIR=' + include_path,
++#                          '-DPYTHON_LIBRARY=' + library,
++                          '-DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX']
+ 
+             cfg = 'Debug' if self.debug else 'Release'
+             build_args = ['--config', cfg]

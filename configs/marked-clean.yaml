@@ -1,0 +1,64 @@
+model_params:
+  name: "MarkedReconstructionModel"
+  in_channels: 3
+  latent_dim: 128
+  point_loss_fn: "MSE"
+  loss_fn: "BCE"
+  radius: 0.512
+  num_points: 4
+  img_size: 512
+  reparameterize: False
+  seg_loss_weight: 1
+  raster_loss_weight: 1
+  vector_loss_weight: 100
+  seg_loss: "dice"
+  path_encoder: "none"
+  image_encoder: "simple"
+#  image_encoder_weights: "logs/VanillaVAE/version_306/checkpoints/epoch=397-step=79599.ckpt"
+#  weights: "logs/MarkedReconstructionModel/version_115/checkpoints/epoch=321-step=200283.ckpt"
+  perceptual_loss: "none"
+  pad_image: False
+#  raster_loss_size: 512
+#  input_img_size: 512
+  global_pooling: True
+  stride: 2
+
+
+exp_params:
+  dataset: douga
+  data_path: "./data/processed/tonari-black-tonari-blue-tonari-red-tonari-lime-sketchbench-black-tuberlin-black-512-0.512"
+  img_size: 512
+  batch_size: 64 # Better to have a square number
+  val_batch_size: 32 # Better to have a square number
+  val_shuffle: False
+  LR: 0.0005
+  weight_decay: 0.0
+  grow: True
+  train_shuffle: True
+  use_scheduler: False
+  show_control_points: False
+  points: 4
+  force_grayscale: False
+  radius: 0.512
+  canvas_noise: False
+  canvas_blur: False
+  path_recursion: True
+  data_augmentation: True
+#  binarization_threshold: .9
+
+# following not necessary
+  num_images: 50
+  min_paths: 3
+  max_paths: 8
+  shapes: 8
+  synthetic_img_size: 512
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 25000
+
+logging_params:
+  save_dir: "logs/"
+  name: "MarkedReconstructionModel"
+  version: 144
+  manual_seed: 1234
